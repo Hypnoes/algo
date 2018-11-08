@@ -181,14 +181,16 @@ class GraphMatrix : public Graph<Te, Tv>
 };
 
 template<typename Tv, typename Te>
-struct PrimPU
+class PrimPU
 {
+  public:
     virtual void operator()(Graph<Tv, Te> *, int, int);
 };
 
 template<typename Tv, typename Te>
-struct DijkstraPU
+class DijkstraPU
 {
+  public:
     virtual void operator()(Graph<Tv, Te> *, int, int);
 };
 
