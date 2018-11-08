@@ -2,12 +2,12 @@
 #ifndef LIST_H_
 #define LIST_H_
 
-#define pNode(T) Node<T>*
+#define pNode(T) ListNode<T>*
 
 typedef int Rank;
 
 template<typename T>
-struct Node
+struct ListNode
 {
     T data;
     pNode(T) pred;

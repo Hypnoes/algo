@@ -233,7 +233,7 @@ void Graph<Tv, Te>::_pfs(int s, PU prioUpdater)
 }
 
 template<typename Tv, typename Te>
-void PrimPU::operator()(Graph<Tv, Te> * g, int uk, int v)
+void PrimPU<Tv, Te>::operator()(Graph<Tv, Te> * g, int uk, int v)
 {
     if (UNDISCOVERED == g->status(v))
     {
@@ -246,7 +246,7 @@ void PrimPU::operator()(Graph<Tv, Te> * g, int uk, int v)
 }
 
 template<typename Tv, typename Te>
-void DijkstraPU::operator()(Graph<Tv, Te> * g, int uk, int v)
+void DijkstraPU<Tv, Te>::operator()(Graph<Tv, Te> * g, int uk, int v)
 {
     if (UNDISCOVERED == g->status(v))
     {

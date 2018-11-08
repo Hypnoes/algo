@@ -1,14 +1,16 @@
 // bintree.h -- binary tree class
 #ifndef BINTREE_H_
 #define BINTREE_H_
+#include <cstddef>
+#include "stackqueue.h"
 
-#define pNode(T) Node<T>*
+#define pNode(T) TreeNode<T>*
 #define stature(p) ((p) ? (p)->height : -1)
 
 typedef enum { RB_RED, RB_BLACK } RBColor;
 
 template<typename T>
-struct Node
+struct TreeNode
 {
     T data;
     pNode(T) parent;
@@ -90,5 +92,22 @@ class BinTree
     bool operator==(BinTree<T> const & t)
     { return _root && t._root && (_root == t.root); }
 };
+
+template<typename T> static int remove_at(pNode(T));
+template<typename T, typename VST> void travPre_R(pNode(T), VST &);
+template<typename T, typename VST> void travIn_R(pNode(T), VST &);
+template<typename T, typename VST> void travPost_R(pNode(T), VST &);
+template<typename T, typename VST> void travPre_i2(pNode(T), VST &);
+template<typename T, typename VST> void travIn_i1(pNode(T), VST &);
+template<typename T, typename VST> void travIn_i2(pNode(T), VST &);
+template<typename T, typename VST> void travIn_i3(pNode(T), VST &);
+template<typename T, typename VST> void travPost_I(pNode(T), VST &);
+
+template<typename T, typename VST> 
+static void visit_along_left_branch(pNode(T), VST &, Stack<pNode(T)> &);
+template<typename T>
+static void go_along_left_branch(pNode(T), Stack<pNode(T)> &);
+template<typename T>
+static void go_to_highest_leaf_visible_from_left(Stack<pNode(T)> &);
 
 #endif
