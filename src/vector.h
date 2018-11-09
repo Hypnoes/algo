@@ -1,6 +1,8 @@
 // vector.h -- vector class
 #ifndef VECTOR_H_
 #define VECTOR_H_
+#include <cstdlib>
+
 #define DEFAULT_CAPACITY
 
 typedef int Rank;
@@ -63,4 +65,16 @@ class Vector
     void traverse(void (*)(T &));
     template<typename V> void traverse(V &);
 };
+
+template<typename T> void premute(Vector<T> &);
+template<typename T> static bool lt (T * a, T * b) { return lt ( * a, * b); }
+template<typename T> static bool lt (T & a, T & b) { return a < b; }
+template<typename T> static bool eq (T * a, T * b) { return eq ( * a, * b); }
+template<typename T> static bool eq (T & a, T & b) { return a == b; }
+
+template<typename T> struct Increase { virtual void operator()(T & e) { e++; } };
+template<typename T> void increase(Vector<T> &) { V.traverse(Increase<T>()); }
+
+template<typename T> static Rank bin_search(T *, T const &, Rank, Rank);
+template<typename T> static Rank fib_search(T *, T const &, Rank, Rank);
 #endif
