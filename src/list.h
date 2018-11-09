@@ -1,6 +1,7 @@
 // list.h -- list class
 #ifndef LIST_H_
 #define LIST_H_
+#include <cstddef>
 
 #define pNode(T) ListNode<T>*
 
@@ -15,10 +16,10 @@ struct ListNode
 
     Node() {}
     Node(T e, pNode(T) p = nullptr, pNode(T) s = nullptr)
-        : data(e), pred(e), next(s) {}
+        : data(e), pred(p), next(s) {}
     
-    pNode(T) insert_as_pred(T const & e);
-    pNode(T) insert_as_succ(T const & e);
+    pNode(T) insert_as_pred(T const &);
+    pNode(T) insert_as_succ(T const &);
 };
 
 template<typename T>
@@ -55,7 +56,7 @@ class List
     int disordered() const;
     pNode(T) find(T const & e) const
     { return find(e, _size, trailer); }
-    pNode(T) find(T cosnt & e, int n, pNode(T) p) const;
+    pNode(T) find(T const & e, int n, pNode(T) p) const;
     pNode(T) search(T const & e) const
     { return search(e, _size, trailer); }
     pNode(T) search(T const & e, int n, pNode(T) p) const;

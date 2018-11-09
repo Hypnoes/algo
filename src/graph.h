@@ -159,7 +159,7 @@ class GraphMatrix : public Graph<Te, Tv>
     virtual Te & egde(int i, int j) { return E[i][j]->data; }
     virtual int & weight(int i, int j) { return E[i][j]->weight; }
 
-    virutal void insert(Te const & edge, int w, int i , int j)
+    virtual void insert(Te const & edge, int w, int i , int j)
     {
         if (exists(i, j)) return;
         E[i][j] = new Egde<Te>(edge, w);
@@ -181,17 +181,9 @@ class GraphMatrix : public Graph<Te, Tv>
 };
 
 template<typename Tv, typename Te>
-struct PrimPU
-{
-  public:
-    virtual void operator()(Graph<Tv, Te> *, int, int);
-};
+struct PrimPU { virtual void operator()(Graph<Tv, Te> *, int, int); };
 
 template<typename Tv, typename Te>
-struct DijkstraPU
-{
-  public:
-    virtual void operator()(Graph<Tv, Te> *, int, int);
-};
+struct DijkstraPU { virtual void operator()(Graph<Tv, Te> *, int, int); };
 
 #endif
