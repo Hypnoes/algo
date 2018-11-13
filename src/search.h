@@ -55,4 +55,24 @@ class AVL : public BinSearchTree<T>
     stature((x)->lc) < stature((x)->rc) ? (x)->rc : (\
     is_lc(*(x)) ? (x)->lc : (x)->rc)))
 
+template<typename T>
+class Splay : public BinSearchTree<T>
+{
+  protected:
+    pNode(T) splay(pNode(T) v);
+
+  public:
+    pNode(T) & search(const T & e);
+    pNode(T) insert(const T & e);
+    bool remove(const T & e(;))
+};
+
+template<typename NodePosi>
+inline void attach_as_lc(NodePosi p, NodePosi lc)
+{ p->lc = lc; if (lc) lc->parent = p; }
+
+template<typename NodePosi>
+inline void attach_as_rc(NodePosi p, NodePosi rc)
+{ p->rc = rc; if (rc) rc->parent = p; }
+
 #endif

@@ -157,3 +157,148 @@ pNode(T) BinSearchTree<T>::rotate_at(pNode(T) v)
         }
     }
 }
+
+template<typename T>
+pNode(T) Splay<T>::splay(pNode(T) v)
+{
+    if (!v) return nullptr;
+    pNode(T) p;
+    pNode(T) g;
+    while ((p = v->parent) && (g = p->parent))
+    {
+        pNode(T) gg = g->parent;
+        if (is_lc(*v))
+        {
+            if (is_lc(*p))
+            {
+                attach_as_lc(g, p->rc);
+                attach_as_lc(p, v->rc);
+                attach_as_rc(p, g);
+                attach_as_rc(v, p);
+            }
+            else
+            {
+                attach_as_lc(p, v->rc);
+                attach_as_rc(g, v->lc);
+                attach_as_lc(v, g);
+                attach_as_rc(v, p);
+            }
+        }
+        else if (is_rc(*p))
+        {
+            attach_as_rc(g, p->lc);
+            attach_as_rc(p, v->lc);
+            attach_as_lc(p, g);
+            attach_as_lc(v, p);
+        }
+        else
+        {
+            attach_as_rc(p, v->lc);
+            attach_as_lc(g, v->rc);
+            attach_as_rc(p, g);
+            attach_as_lc(v, p);
+        }
+        if (!gg)
+            v->parent = nullptr;
+        else
+            (g == gg->lc) ? attach_as_lc(gg, v) : attach_as_rc(gg, v);
+        update_height(g);
+        update_height(p);
+        update_height(v);
+    }
+    if (p = v->parent)
+    {
+        if (is_lc(*c))
+        {
+            attach_as_lc(p, v->rc);
+            attach_as_rc(v, p);
+        }
+        else
+        {
+            attach_as_rc(p, v->lc);
+            attach_as_lc(v, p);
+        }
+        update_height(p);
+        update_height(v);
+    }
+    v->parent = nullptr;
+    return v;
+}
+
+template<typename T>
+pNode(T) & Splay<T>::search(const T & e)
+{
+    pNode(T) p = search_in(_root, e, _hot = nullptr);
+    _root = splay(p ? p : _hot);
+    return _root;
+}
+
+template<typename T>
+pNode(T) Splay<T>::insert(const T & e)
+{
+    if (!_root)
+    {
+        _size += 1;
+        return _root = new TreeNode<T>(e);
+    }
+    if (e == search(e)->data)
+        return _root;
+    _size += 1;
+    pNode(T) t = _root;
+    if (_root->data < e)
+    {
+        t->parent = _root = new TreeNode<T>(e, nullptr, t, t->rc);
+        if (has_rc(*t))
+        {
+            t->rc->parent = _root;
+            t->rc = nullptr;
+        }
+    }
+    else
+    {
+        t->parent = _root = new TreeNode<T>(e, nullptr, t->lc = nullptr);
+        if (has_lc(*t))
+        {
+            t->lc->parent = _root;
+            t->lc = nullptr;
+        }
+    }
+    update_height_above(t);
+    return _root;
+}
+
+template<typename T>
+bool Splay<T>::remove(const T & e)
+{
+    if (!_root || (e != search(e)->data)) return false;
+    pNode(T) w = _root;
+    if (!has_lc(*_root))
+    {
+        _root = _root->rc;
+        if (_root)
+            _root->parent = nullptr;
+    }
+    else if (!has_rc(*_root))
+    {
+        _root = _root->lc;
+        if (_root)
+            _root->parent = nullptr;
+    }
+    else
+    {
+        pNode(T) lTree = _root->lc;
+        lTree->parent = nullptr;
+        _root->lc = nullptr;
+        _root = _root->rc;
+        _root->parent = nullptr
+        search(w->data);
+        _root->lc = lTree;
+        lTree->parent = _root;
+    }
+    release(w->data);
+    release(w);
+    _size -= 1;
+    if (_root)
+        update_height(_root);
+    return true;
+}
