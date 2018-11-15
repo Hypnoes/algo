@@ -14,8 +14,8 @@ struct ListNode
     pNode(T) pred;
     pNode(T) next;
 
-    Node() {}
-    Node(T e, pNode(T) p = nullptr, pNode(T) s = nullptr)
+    ListNode() {}
+    ListNode(T e, pNode(T) p = nullptr, pNode(T) s = nullptr)
         : data(e), pred(p), next(s) {}
     
     pNode(T) insert_as_pred(T const &);

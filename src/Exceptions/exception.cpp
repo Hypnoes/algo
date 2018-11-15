@@ -1,7 +1,7 @@
 // exception.cpp -- inply of exception class
 #include "exception.h"
 
-const std::ostream & operator<<(const std::ostream & os, Exception e)
+const std::wostream & operator<<(const std::wostream & os, Exception e)
 {
     os << e._msg;
     return os;

@@ -104,8 +104,13 @@ class GraphMatrix : public Graph<Te, Tv>
     ~GraphMatrix()
     {
         for (int j = 0; j < n; j++)
+        {
             for (int k = 0; k < n; k++)
+            {
                 delete E[j][k];
+                E[j][k] == nullptr;
+            }
+        }
     }
 
     virtual Tv& vertex(int i) { return V[i].data; }
@@ -135,6 +140,7 @@ class GraphMatrix : public Graph<Te, Tv>
         {    if (exists(i, j))
             {
                 delete E[i][j];
+                E[i][j] == nullptr;
                 V[j].in_degree--;
             }    
         }
@@ -146,6 +152,7 @@ class GraphMatrix : public Graph<Te, Tv>
             if (Edge<Te> * e = E[j].remove(i))
             {
                 delete e;
+                e = nullptr;
                 V[j].out_degree--;
             }
         }
@@ -172,7 +179,7 @@ class GraphMatrix : public Graph<Te, Tv>
     {
         Te eBak = edge(i, j);
         delete E[i][j];
-        E[i][j] = NULL;
+        E[i][j] = nullptr;
         e -= 1;
         V[i].out_degree -= 1;
         V[j].in_degree -= 1;

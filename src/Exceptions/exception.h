@@ -7,14 +7,14 @@ class Exception
 {
   private:
     unsigned _errno;
-    char * _msg;
+    wchar_t * _msg;
 
   public:
-    Exception() : _errno(0), _msg("\0") {}
-    Exception(char * msg, unsigned errno = 0)
+    Exception() : _errno(0), _msg(L"\0") {}
+    Exception(wchar_t * msg, unsigned errno = 0)
         : _errno(errno), _msg(msg) {}
 
-    friend const std::ostream & operator<<(const std::ostream & os, 
+    friend const std::wostream & operator<<(const std::wostream & os, 
                                            Exception e);
 };
 

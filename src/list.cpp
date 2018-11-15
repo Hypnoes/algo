@@ -83,6 +83,7 @@ T List<T>::remove(pNode(T) p)
     p->pred->next = p->next;
     p->next->pred = p->pred;
     delete p;
+    p = nullptr;
     _size -= 1;
     return e;
 }

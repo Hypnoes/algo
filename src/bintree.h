@@ -20,10 +20,10 @@ struct TreeNode
     int npl;
     RBColor color;
 
-    Node()
+    TreeNode()
         : parent(nullptr), lc(nullptr), rc(nullptr),
           height(0), npl(1), color(RB_RED) {}
-    Node(T e, pNode(T) p = nullptr, pNode(T) lc = nullptr, pNode(T) rc = nullptr,
+    TreeNode(T e, pNode(T) p = nullptr, pNode(T) lc = nullptr, pNode(T) rc = nullptr,
          int h = 0, int l = 1, RBColor c = RB_RED)
         : data(e), parent(p), lc(lc), rc(rc), height(h), npl(l), color(c) {}
     
