@@ -36,8 +36,8 @@ struct TreeNode
     template<typename VST> void trav_in(VST &);
     template<typename VST> void trav_post(VST &);
 
-    bool operator<(Node const & n) { return data < n.data; }
-    bool operator==(Node const & n) { return data == n.data; }
+    bool operator<(TreeNode const & n) { return data < n.data; }
+    bool operator==(TreeNode const & n) { return data == n.data; }
 };
 
 #define is_root(x) (!((x).parent));
@@ -110,4 +110,23 @@ static void go_along_left_branch(pNode(T), Stack<pNode(T)> &);
 template<typename T>
 static void go_to_highest_leaf_visible_from_left(Stack<pNode(T)> &);
 
+// Huffman Tree
+#define N_CHAR (0x80 - 0x20)
+struct HuffChar
+{
+    char ch;
+    int weight;
+    
+    Huffchar(char c = '^', int w = 0) : ch(c), weight(w) {}
+    
+    bool operator<(Huffchar const & hc) { return weight > hc.weight; }
+    bool operator==(Huffchar const & hc) { return weight == hc.weight; }
+};
+
+#define HuffTree BinTree<HuffChar>
+#include "list.h"
+#include "dict.h"
+typedef List<HuffTree *> HuffForest;
+typedef Bitmap HuffCode;
+typedef HashTable<char, char *> HuffTable;
 #endif
