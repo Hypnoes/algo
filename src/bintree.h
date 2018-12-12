@@ -117,7 +117,7 @@ struct HuffChar
     char ch;
     int weight;
     
-    Huffchar(char c = '^', int w = 0) : ch(c), weight(w) {}
+    HuffChar(char c = '^', int w = 0) : ch(c), weight(w) {}
     
     bool operator<(Huffchar const & hc) { return weight > hc.weight; }
     bool operator==(Huffchar const & hc) { return weight == hc.weight; }
