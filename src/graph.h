@@ -118,7 +118,7 @@ class GraphMatrix : public Graph<Te, Tv>
     virtual int out_degree(int i) { return V[i].out_degree; }
     virtual first_nbr(int i) { return next_nbr(i, n); }
     virtual next_nbr(int i, int j)
-    { while ((-1 < j) &&  (!exists(i, --j))); return j; }
+    { while ((-1 < j) && (!exists(i, --j))); return j; }
     virtual VStatus & status(int i) { return V[i].status; }
     virtual int & d_time(int i) { return V[i].dTime; }
     virtual int & f_time(int i) { return V[i].fTime; }
